@@ -1,0 +1,40 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "sakura-canvas-ts"
+			}
+		},
+		{
+			"path": "pages/index/autoHeight",
+			"style": {
+				"navigationBarTitleText": "不固定高度"
+			}
+		},
+		{
+			"path": "pages/index/autoBackground",
+			"style": {
+				"navigationBarTitleText": "不固定背景图片高度"
+			}
+		},
+		{
+			"path": "pages/index/poster",
+			"style": {
+				"navigationBarTitleText": "海报分享图"
+			}
+		},
+		{
+			"path": "pages/index/jsonPoster",
+			"style": {
+				"navigationBarTitleText": "JSON-海报分享图"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "sakuraCanvasTs",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
