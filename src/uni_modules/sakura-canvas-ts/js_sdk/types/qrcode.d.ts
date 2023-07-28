@@ -98,4 +98,9 @@ declare namespace SakuraCanvasQrcode {
 		 */
 		options: Required<DrawPrivateParams>
 	}
+	type QrcodeInstance = {
+		text: string,
+		correctLevel: number,
+		instance: any
+	}
 }
