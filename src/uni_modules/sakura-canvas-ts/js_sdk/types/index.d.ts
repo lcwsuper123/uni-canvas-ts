@@ -138,7 +138,7 @@ declare namespace SakuraCanvasShared {
 		 */
 		height: number,
 	}
-	/**
+	/*
 	 * 获取使用了box-sizing之后的绘制信息
 	 */
 	type UseBoxiSizingData = {

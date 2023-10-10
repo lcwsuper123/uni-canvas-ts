@@ -1,7 +1,14 @@
-import { extend, sleep } from './../utils/shared'
-import { formatGradientParams, getBasicDrawParamsDefaultValue, getFillStyleParamsDefaultValue, getGradientParamsDefalutValue, getShadowParamsDefaultValue } from './../utils/params'
+import { extend, sleep } from '../utils/shared'
+import {
+	formatGradientParams,
+	getBasicDrawParamsDefaultValue,
+	getFillStyleParamsDefaultValue,
+	getGradientParamsDefalutValue,
+	getShadowParamsDefaultValue
+} from '../utils/params'
 import { createRect } from './rect'
 import { createImage } from './image'
+
 /**
  * 创建canvas上下文的参数
  */
@@ -239,14 +246,13 @@ export async function createSakuraCanvasUtils(params: SakuraCanvasParams.SakuraC
 	// #endif
 	const { context, canvas, } = await createCanvasContext(params, dpr)
 	const contextGlobalMethods = createCanvasContextGlobalMethods(context, params)
-	const utils: SakuraCanvasShared.SakuraCanvasUtils = {
+	return {
 		...params,
 		context,
 		canvas,
 		contextGlobalMethods,
 		dpr
 	}
-	return utils
 }
 /**
  * 创建背景
@@ -419,9 +425,9 @@ export function exportImage(this: SakuraCanvasShared.SakuraCanvasUtils, params?:
 }
 /**
  * 获取搜索的绘制信息内容
- * @param searchKey 搜索的key, 多个用逗号分割
- * @param beforePositionInfo 上一次绘制信息
- * @param allPositionInfoList 所有的绘制信息
+ * @param params.searchKey 搜索的key, 多个用逗号分割
+ * @param params.beforePositionInfo 上一次绘制信息
+ * @param params.allPositionInfoList 所有的绘制信息
  * @returns 
  */
 const getCallbackPositionInfo = (params: SakuraCanvasJSON.GetCallbackPositionInfoParams): SakuraCanvasJSON.CallbackPositionInfoResult => {
@@ -474,19 +480,19 @@ export async function jsonDrawPoster(sakuraContext: SakuraCanvasShared.SakuraCan
 	}
 	// 存储所有的绘制内容的位置信息
 	const allPositionInfoList: SakuraCanvasJSON.DrawPositionInfoData[] = []
-	const allPositionInfoDataList: SakuraCanvasJSON.DrawPositionInfoData['data'][] = [] 
+	// const allPositionInfoDataList: SakuraCanvasJSON.DrawPositionInfoData['data'][] = []
 	// 上一次的绘制信息
 	let beforePositionInfo: SakuraCanvasJSON.DrawPositionInfoData = {} as SakuraCanvasJSON.DrawPositionInfoData
 	try {
 		for (const data of await fn(canvasWidth,canvasHeight)) {
 			const { type, params, searchKey = '', callback, key } = data
-			const drawDataParams: SakuraCanvasJSON.DrawPosterData['params'] = extend({}, params, callback ? callback(...getCallbackPositionInfo({ searchKey, beforePositionInfo, allPositionInfoList: allPositionInfoList })) : {})
+			const drawDataParams: SakuraCanvasJSON.DrawPosterData['params'] = extend({}, params, callback ? callback(...getCallbackPositionInfo({ searchKey, beforePositionInfo, allPositionInfoList })) : {})
 			beforePositionInfo = {
 				key: key ?? '',
 				data: await drawMethods[type](drawDataParams)
 			}
 			allPositionInfoList.push(beforePositionInfo)
-			allPositionInfoDataList.push(beforePositionInfo.data)
+			// allPositionInfoDataList.push(beforePositionInfo.data)
 		}
 		context.draw && context.draw()
 		return {

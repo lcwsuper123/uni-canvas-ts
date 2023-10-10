@@ -3,10 +3,10 @@ import { getPositionInfoByDot } from '../utils/positionInfo'
 import { extend } from '../utils/shared'
 /**
  * 创建多边形模型
- * @param options 
- * @param options.n 几条边 最少三条
- * @param options.size 多边形的大小
- * @param options.angle 绘制时的初始角度默认Math.PI / 2
+ * @param params
+ * @param params.n 几条边 最少三条
+ * @param params.size 多边形的大小
+ * @param params.angle 绘制时的初始角度默认Math.PI / 2
  * @returns
  */
 export const createPolygonModel = (params: SakuraCanvasPolygon.CreateModelParams): SakuraCanvasPolygon.ModelInfo => {

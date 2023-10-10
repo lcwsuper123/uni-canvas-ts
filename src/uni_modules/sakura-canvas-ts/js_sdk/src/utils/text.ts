@@ -1,4 +1,5 @@
-import { computedPosition, deepObject, extend } from './shared'
+import { computedPosition, extend } from './shared'
+
 /**
  * 计算文字大小
  * @param this canvas上下文对象
@@ -7,8 +8,7 @@ import { computedPosition, deepObject, extend } from './shared'
  */
 export function measureText(this: UniApp.CanvasContext, text: string, fontSize: number): TextMetrics {
 	if (this.measureText) {
-		const textMetrics = this.measureText(text) as TextMetrics
-		return textMetrics
+		return this.measureText(text) as TextMetrics
 	}
 	// 这是为了兼容钉钉小程序,钉钉小程序没有Context.measureText方法
 	let length = 0
@@ -273,7 +273,7 @@ export const formatText = (params: SakuraCanvasText.FormatParams): SakuraCanvasT
 		defaultLine: line
 	}
 	if (isBr) {
-		const texts: SakuraCanvasText.FormatData = text.split('\n').map((v, i) => {
+		return text.split('\n').map((v, i) => {
 			const data = {
 				text: v,
 				isBr: true,
@@ -285,7 +285,6 @@ export const formatText = (params: SakuraCanvasText.FormatParams): SakuraCanvasT
 			highlightTextParams.originText = v
 			return isHighlightText ? formatHighlightText(highlightTextParams) : data
 		}).flat()
-		return texts
 	}
 	return isHighlightText ? formatHighlightText(highlightTextParams) : [{ text, isBr: false, color, font: defaultFont, line }]
 }

@@ -76,7 +76,6 @@ export const getRectRoundData = (r: SakuraCanvasRect.Round): SakuraCanvasRect.Ro
 		bottom,
 		left
 	}
-	
 }
 /**
  * 创建矩形
@@ -111,6 +110,6 @@ export async function createRect(this: SakuraCanvasShared.SakuraCanvasUtils, par
 		context.lineTo(x + left, y + height)
 		context.arc(x + left, y + height - left, left, Math.PI * .5, Math.PI, false)
 		context.lineTo(x, y + top)
-		context.arc(x + top, y + top, top, Math.PI * 1, Math.PI * 1.5, false)
+		context.arc(x + top, y + top, top, Math.PI, Math.PI * 1.5, false)
 	})
 }

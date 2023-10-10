@@ -5,6 +5,7 @@ import { createPolygon } from './polygon'
 import { createFiveStar } from './fiveStar'
 import { createRect } from './rect'
 import { createCircle } from './circle'
+
 /**
  * 获取图片绘制信息
  * @param params.x 水平方向位置 
@@ -136,8 +137,7 @@ export async function createImage(this: SakuraCanvasShared.SakuraCanvasUtils, pa
 	})
 	fillStyle.setColor = fillStyle.setColor ?? false
 	if (type === '2d') {
-		const imageSrc = await loadImage(imagePositionInfo.drawImageInfo.path, canvas)
-		imagePositionInfo.drawImageInfo.path = imageSrc
+		imagePositionInfo.drawImageInfo.path = await loadImage(imagePositionInfo.drawImageInfo.path, canvas)
 	}
 	const { drawImageInfo } = imagePositionInfo
 	// 绘制图片触发回调
